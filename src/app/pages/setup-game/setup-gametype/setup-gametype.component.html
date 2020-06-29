@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-item lines="full">
+    <ion-text><h1>Select Gametype</h1></ion-text>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>Gametype</ion-label>
+    <ion-select placeholder="Select One" [interfaceOptions]="selectOptions" interface="popover" [(ngModel)]="optionsName">
+      <ion-select-option *ngFor="let name of gameOptionNames" [value]="name">{{name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+</ion-list>

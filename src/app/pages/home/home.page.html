@@ -1,0 +1,54 @@
+<app-header [text]="'Home'"></app-header>
+
+<ion-content>
+  <ion-card class="title-play-card">
+    <ion-card-header>
+      <div class="main-card-header">
+        <ion-card-subtitle>
+          <h4>Welcome to</h4>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <h1>
+            <em><b>Sharp Score</b></em>
+          </h1>
+        </ion-card-title>
+      </div>
+    </ion-card-header>
+    <ion-card-content class="title-play-card-content">
+      <ion-button (click)="quickPlayRL.click()">
+        Quick Play
+        <a [routerLink]="['/game/setup']" [queryParams]="{quickStart: true}" #quickPlayRL></a>
+      </ion-button>
+      <br />
+      <ion-button (click)="setupPlayRL.click()" [disabled]="!(user$ | async)">
+        Advanced Game Setup
+        <a [routerLink]="['/game/setup']" #setupPlayRL></a>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>
+      Recently Played Games
+    </ion-label>
+  </ion-item>
+  <ion-card *ngFor="let g of games$ | async">
+    <ion-card-header>
+      <ion-card-title>{{g?.datePlayed?.toDate() | date:'MMM d, y, h:mm a'}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <span>Gametype: {{g.gameOptionsName}}</span>
+      </ion-item>
+      <ion-item>
+        Players:&nbsp;
+        <span *ngFor="let u of g.playersUserIds">
+          {{ (u | doc | async)?.displayName }},&nbsp;
+        </span>
+      </ion-item>
+      <ion-item>
+        <span>Winner: {{ (g.winnerUserId | doc | async)?.displayName }}</span>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

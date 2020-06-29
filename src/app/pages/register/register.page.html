@@ -1,0 +1,51 @@
+<app-header text="Register" hideLogin></app-header>
+
+<ion-content>
+  <ion-item>
+    <h1>SharpScore registration</h1>
+  </ion-item>
+  <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" appCredentialMatch>
+    <ion-card>
+      <ion-item>
+        <ion-label for="email" position="floating">Email</ion-label>
+        <ion-input email required type="email" name="email" [(ngModel)]="email" #emailIn="ngModel"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirm Email</ion-label>
+        <ion-input required type="email" name="cEmail" [(ngModel)]="cEmail" email #cEmailIn="ngModel"></ion-input>
+      </ion-item>
+    </ion-card>
+    <ion-item lines="none">
+      <ion-note color="danger" *ngIf="registerForm.hasError('emailMismatch')">
+        Emails do not match
+      </ion-note>
+    </ion-item>
+    <ion-card>
+      <ion-item>
+        <ion-label for="password" position="floating">Password</ion-label>
+        <ion-input required type="password" name="password" [(ngModel)]="password" #passwordIn="ngModel"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input required type="password" name="cPassword" [(ngModel)]="cPassword" #cPasswordIn="ngModel"></ion-input>
+      </ion-item>
+    </ion-card>
+    <ion-item lines="none">
+      <ion-note color="danger" *ngIf="registerForm.hasError('passwordMismatch')">
+        Passwords do not match
+      </ion-note>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-button routerLink="/login" slot="start" color="danger" size="large" expand="full">Cancel</ion-button>
+      <ion-button
+        slot="end"
+        type="submit"
+        size="large"
+        expand="full"
+        [disabled]="registerForm.invalid || registerForm.hasError('emailMismatch') || registerForm.hasError('passwordMismatch')"
+        >Submit</ion-button
+      >
+    </ion-item>
+  </form>
+</ion-content>

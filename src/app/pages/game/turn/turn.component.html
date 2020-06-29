@@ -1,0 +1,20 @@
+<div class="turn-header-wrapper">
+  <h1 class="turn-header">{{ CurrentTurn.playerId }}'s turn</h1>
+  <ion-card>
+    <ion-card-content>
+      <ion-text>
+        Turn Total: {{ CurrentTurn.ThrowTotal }} 
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</div>
+<div class="turn-throw-wrapper">
+  <ion-card *ngFor="let dt of CurrentTurn.dartThrows; let i = index" class="turn-card">
+    <p class="turn-counter">
+      <ion-badge color="tertiary">
+        {{ i + 1 | ordinal }}
+      </ion-badge>
+    </p>
+    <h1>{{ dt.text }}</h1>
+  </ion-card>
+</div>

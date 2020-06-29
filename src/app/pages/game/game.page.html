@@ -1,0 +1,35 @@
+<app-header [text]="'PlayDarts!'"></app-header>
+
+<ion-content>
+  <ion-slides #slider style="height: 100%;" (ionSlideDidChange)="onSlideEnd()">
+    <ion-slide>
+      <app-turn></app-turn>
+
+      <app-dartboard
+        (clickDartThrow)="onClickDartThrow($event)"
+        (clickClear)="onClickClear()"
+        (clickFinish)="onClickFinish()"
+      ></app-dartboard>
+
+      <!-- <div class="nav-tabular-left">
+        <ion-icon [ios]="'caret-back-outline'" [md]="'caret-back-outline'"></ion-icon>
+      </div> -->
+    </ion-slide>
+
+    <ion-slide class="scoreboard-slide">
+      <app-scoreboard></app-scoreboard>
+      <!-- <div class="nav-tabular-right">
+        <ion-icon [ios]="'caret-forward-outline'" [md]="'caret-forward-outline'"></ion-icon>
+      </div> -->
+    </ion-slide>
+    <div class="nav-tab">
+      <p>
+        <ion-icon [ios]="'caret-back-outline'" [md]="'caret-back-outline'"></ion-icon>
+        <ion-icon [ios]="'caret-forward-outline'" [md]="'caret-forward-outline'"></ion-icon>
+      </p>
+  
+    </div>
+  </ion-slides>
+
+
+</ion-content>

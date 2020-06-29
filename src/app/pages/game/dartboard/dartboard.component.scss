@@ -1,0 +1,32 @@
+:host {
+    width: 100%;
+    margin-bottom: 9px;
+}
+.board-row {
+    height: 60px;
+}
+.board-top {
+    height: 42px;
+}
+
+ion-button {
+    height: 56px;
+    font-size: 1.2rem;
+    &.half {
+        width: 52%;
+    }
+
+    &.fourth {
+        width: 25%;
+    }
+
+    &.sixth {
+        width: 16.5%;
+    }
+
+    &.top {
+        height: 36px;
+        // margin-bottom: 0;
+    }
+
+}

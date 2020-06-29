@@ -1,0 +1,14 @@
+<ion-item class="board-top" lines="none">
+  <ion-button color="danger" class="half top" (click)="onClickClear()">Clear</ion-button>
+  <ion-button color="success" class="half top" (click)="onClickFinish()">Finish</ion-button>
+</ion-item>
+<ion-item *ngFor="let row of dartboard" class="board-row" lines="none">
+  <ion-button
+    *ngFor="let dartthrow of row"
+    [ngClass]="{ half: dartthrow.size === 'half', fourth: dartthrow.size === 'fourth', sixth: dartthrow.size === 'sixth' }"
+    
+    [color]="multiplierString === dartthrow.text ? 'secondary' : dartthrow.value >= 0 ? 'primary' : 'tertiary'"
+    (click)="onClickDartThrow(dartthrow)"
+    >{{ dartthrow.text }}</ion-button
+  >
+</ion-item>

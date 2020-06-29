@@ -1,0 +1,32 @@
+.nav-tab {
+  width: 60px;
+  position: fixed;
+  top: 80px;
+  right: -30px;
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+    height: 55px;
+    color: white;
+    background-color: #3880ff;
+    border-radius: 5px;
+    box-shadow: 0 1px 10px -5px black;
+  }
+}
+
+ion-slide {
+  flex-direction: column;
+  justify-content: space-between;
+  .game-turn {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .scoreboard-slide {
+    overflow-y: auto;
+
+  }
+
+}

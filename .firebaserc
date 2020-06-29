@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sharpscorekeeper": {
+      "hosting": {
+        "app": [
+          "sharpscorekeeper"
+        ]
+      }
+    }
+  }
+}

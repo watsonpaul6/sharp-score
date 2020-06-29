@@ -1,0 +1,19 @@
+:host {
+    width: 100%;
+
+}
+ion-card {
+    // height: 40vh;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+.player-list-item {
+    text-align: center;
+}
+.item-index-text {
+    text-align: left;
+}
+
+.player-name-item {
+    --highlight-color-valid: #3880ff;
+}

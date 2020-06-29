@@ -1,0 +1,44 @@
+:host {
+  width: 100%;
+  overflow-y: scroll;
+  padding-left: 12px;
+}
+.turn-throw-wrapper {
+  // width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+
+}
+.turn-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  ion-card {
+    // width: max-content;
+    flex: 1;
+    text-align: left;
+    align-content: center;
+  }
+}
+.turn-header {
+  text-align: left;
+}
+.turn-counter {
+  text-align: left;
+  margin: 0 auto;
+  position: relative;
+  top: -8px;
+  left: -8px;
+  ion-badge {
+    box-shadow: 2px 2px 13px -4px black inset;
+    font-size: .7rem;
+  }
+}
+.turn-card {
+  // width: 6px;
+  padding: 7px;
+  h1 {
+    margin: 0 auto;
+  }
+}

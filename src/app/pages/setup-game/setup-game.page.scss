@@ -1,0 +1,24 @@
+ion-slides {
+  height: 100%;
+}
+ion-slide {
+  // align-items: baseline;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.next-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+.back-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+.play-btn {
+  height: 47px;
+  margin: auto 11px 11px;
+  align-self: stretch;
+}

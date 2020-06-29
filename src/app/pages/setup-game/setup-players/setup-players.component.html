@@ -1,0 +1,57 @@
+<ion-list>
+  <ion-item lines="full">
+    <ion-text><h1>Add Players</h1></ion-text>
+  </ion-item>
+
+  <ion-item class="player-name-item" lines="inset">
+    <ion-input
+      placeholder="Player name"
+      type="text"
+      [(ngModel)]="playerName"
+      #playerInput
+      (keydown.enter)="onAddPlayer(); playerInput.value = ''"
+    ></ion-input>
+    <ion-button slot="end" (click)="onAddPlayer(); playerInput.value = ''">Add</ion-button>
+  </ion-item>
+
+  <ion-item class="player-list-item">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="item-index-text">
+          <ion-text>
+            Turn Order
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text>
+            Player Name
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-card>
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="onReorder($event)">
+      <ion-item-sliding *ngFor="let p of players; let i = index">
+        <ion-item class="player-list-item">
+          <ion-reorder></ion-reorder>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="item-index-text">
+                <ion-text>{{ i + 1 }}</ion-text>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{ p }}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="onRemovePlayer(i)">Remove</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-card>
+</ion-list>

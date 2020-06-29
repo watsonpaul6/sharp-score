@@ -1,0 +1,15 @@
+<ion-grid>
+  <ion-row *ngFor="let headerRow of (scoreboardDisplay$ | async).headers">
+    <ion-col *ngFor="let h of headerRow">
+      {{h.text}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let bodyRow of (scoreboardDisplay$ | async).body">
+    <ion-col *ngFor="let b of bodyRow">
+      {{b.text}}
+    </ion-col>
+  </ion-row>
+
+
+</ion-grid>
