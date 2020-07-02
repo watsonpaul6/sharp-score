@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ComponentFactoryResolver } from "@angular/core";
 
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { UserAuthService } from "./core/services/user-auth/user-auth.service";
+import { AngularFireFunctions } from "@angular/fire/functions";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -29,11 +31,13 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private userAuth: UserAuthService
+    private userAuth: UserAuthService,
+
   ) {
     this.initializeApp();
-  }
 
+  }
+  private data$: Observable<any>;
   public get user$() {
     return this.userAuth.userInfo$;
   }
@@ -43,6 +47,8 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
     });
   }
+
+
 
   ngOnInit() {
     const path = window.location.pathname.split("/")[1];

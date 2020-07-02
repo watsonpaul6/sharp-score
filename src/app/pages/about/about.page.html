@@ -1,4 +1,70 @@
 <app-header [text]="'About'"></app-header>
 
+<ion-content style="text-align: center;">
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>About this app</ion-card-subtitle> -->
+      <ion-card-title>Sharp Score</ion-card-title>
+    </ion-card-header>
 
-<ion-content> </ion-content>
+    <ion-card-content>
+      <!-- Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the
+      woods. Wash your spirit clean. -->
+      <p>
+        Sharp Score is a tool for playing and tracking a variety of dart games. Players can jump right in to a quick
+        play game, or set up an account and create their own custom game modes.
+        <br /><br />This application has been built with <ion-icon name="logo-angular"></ion-icon>Angular9 and
+        <ion-icon name="logo-ionic"></ion-icon>Ionic, while using <ion-icon name="logo-firebase"></ion-icon>Firebase for
+        the backend database and static hosting.
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registration</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        Users can register either with an exisiting Google account, or with an email and password. Upon becoming
+        registered, users can create/edit a display name for their SharpScore account. This name will be used on the
+        dart game score sheets, and for the time being, can be changed at will.
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Using the app</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        From the home page, non-registered and registered users can use the quick play feature to set up a quick game,
+        that will not be saved to the database. This quick play allows the user to select between several preset game
+        modes.
+      </p>
+      <br />
+      <p>
+        Registered users will have the option to use the advanced game setup feature. This allows the user to edit more
+        in depth game rules and options, as well as saving games to their account, and viewing the scoresheets of games
+        played in the past.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>About the creator</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        This app is currently in development by me, Andrew Watson. I am a 23 year old Computer Science Engineering
+        graduate from Michigan State University. 
+        <br><br>I am always eager to learn and have been especially fascinated with web
+        development. I plan to make this application into a
+        <a href="https://web.dev/what-are-pwas/" target="_blank">Progressive Web App</a> and provide native support for Android and iOS.
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
