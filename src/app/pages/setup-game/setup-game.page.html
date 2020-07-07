@@ -3,24 +3,23 @@
 <ion-content>
   <ion-slides [options]="slideOpts" #slides>
     <ion-slide>
-      <app-setup-gametype [(gameOptions)]="dartGameController.gameOptions"></app-setup-gametype>
-      <app-setup-players [(players)]="dartGameController.players"></app-setup-players>
-      <ion-button class="play-btn" (click)="onClickPlay()" [disabled]="!playersValidated">Play Game!</ion-button>
+      <app-setup-gametype
+        [(gameOptions)]="dartGameController.gameOptions"
+        [quickStart]="quickStart"
+      ></app-setup-gametype>
+      <ng-container *ngIf="quickStart">
+        <app-setup-players [(players)]="dartGameController.players"></app-setup-players>
+        <ion-button class="play-btn" (click)="onClickPlay()" [disabled]="!playersValidated">Play Game!</ion-button>
+      </ng-container>
+      <ion-button *ngIf="!quickStart" class="continue-btn" (click)="nextSlide()">Continue</ion-button>
+
     </ion-slide>
-    <ion-slide></ion-slide>
+    <ion-slide>
+      <ng-container *ngIf="!quickStart">
+        <app-setup-players [(players)]="dartGameController.players"></app-setup-players>
+        <ion-button class="play-btn" (click)="onClickPlay()" [disabled]="!playersValidated">Play Game!</ion-button>
+      </ng-container>
+    </ion-slide>
   </ion-slides>
 </ion-content>
 
-<!-- <ion-content>
-  <ion-slides [options]="slideOpts" #slides>
-    <ion-slide>
-      <app-setup-gametype></app-setup-gametype>
-      <app-setup-players></app-setup-players>
-////      <ion-button color="tertiary" class="next-btn" (click)="onClickNext()" [disabled]="!playersValidated">Next</ion-button>
-      <ion-button class="play-btn" (click)="onClickPlay()" [disabled]="!playersValidated">Play Game!</ion-button>
-    </ion-slide>
-////    <ion-slide>
-////      <ion-button color="tertiary" class="back-btn" (click)="onClickBack()">Back</ion-button>
-////    </ion-slide>
-  </ion-slides>
-</ion-content> -->

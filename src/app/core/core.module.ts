@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { HeaderPopoverComponent } from "./components/header-popover.component";
 import { EditUserModalComponent } from "./components/header/edit-user-modal.component";
 import { DocPipe } from "./pipes/doc-pipe/doc-pipe.pipe";
+import { NewGameControllerService } from './services/new-game-controller/new-game-controller.service';
 
 export const DART_GAME_CONTROLLER = new InjectionToken<IDartGameController>("dart_game_controller");
 
@@ -38,7 +39,8 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [{ provide: DART_GAME_CONTROLLER, useClass: GameControllerService }, UserAuthService],
+      providers: [{ provide: DART_GAME_CONTROLLER, useClass: NewGameControllerService }, UserAuthService],
+      // providers: [{ provide: DART_GAME_CONTROLLER, useClass: GameControllerService }, UserAuthService],
     };
   }
 }

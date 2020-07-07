@@ -15,7 +15,7 @@ export interface IDartGameController {
 
   scoreboardDisplay$: Observable<DartGameScoreboardDisplay>;
 
-  initNewGame(players?: string[]): void;
+  initNewGame(): void;
 
   addThrowCurrentTurn(dartThrow: DartGameThrow): void;
   removeThrowCurrentTurn(throwIdx: number): void;

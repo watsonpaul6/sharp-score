@@ -1,15 +1,81 @@
 <ion-list>
-  <ion-item lines="full">
-    <ion-text><h1>Select Gametype</h1></ion-text>
-  </ion-item>
+  <ng-container *ngIf="quickStart; else details">
+    <ion-item lines="full">
+      <ion-text><h1>Select Gametype</h1></ion-text>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Gametype</ion-label>
+      <ion-select
+        placeholder="Select One"
+        [interfaceOptions]="selectOptions"
+        interface="popover"
+        [(ngModel)]="optionsName"
+      >
+        <ion-select-option *ngFor="let name of gameOptionNames" [value]="name">{{ name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ng-container>
 
-  <ion-item>
-    <ion-label>Gametype</ion-label>
-    <ion-select placeholder="Select One" [interfaceOptions]="selectOptions" interface="popover" [(ngModel)]="optionsName">
-      <ion-select-option *ngFor="let name of gameOptionNames" [value]="name">{{name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ng-template #details>
+    <ion-item lines="full">
+      <ion-text><h1>Gametype Options</h1></ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gametype</ion-label>
+      <ion-select
+        placeholder="Select One"
+        interface="popover"
+        [interfaceOptions]="selectOptions"
+        [(ngModel)]="optionsName"
+      >
+        <ion-select-option *ngFor="let name of gameOptionNames" [value]="name">{{ name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
+    <ion-item>
+      <ion-label position="floating">Throws Per Turn</ion-label>
+      <ion-input type="number" [(ngModel)]="gameOptions.throwsPerTurn"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label position="floating">Rounds Per Game</ion-label>
+      <ion-input type="number" [(ngModel)]="gameOptions.roundsPerGame"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Starting Score</ion-label>
+      <ion-input type="number" [(ngModel)]="gameOptions.startingScore"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Target Score</ion-label>
+      <ion-input type="number" [(ngModel)]="gameOptions.targetScore"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>In Rules</ion-label>
+      <ion-select multiple="true" [(ngModel)]="gameOptions.inRules" placeholder="None">
+        <ion-select-option *ngFor="let inRule of inOutRules" [value]="inRule">{{ inRule }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Out Rules</ion-label>
+      <ion-select multiple="true" [(ngModel)]="gameOptions.outRules" placeholder="None">
+        <ion-select-option *ngFor="let outRule of inOutRules" [value]="outRule">{{ outRule }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Score Rule</ion-label>
+      <ion-select [(ngModel)]="gameOptions.scoreRule" placeholder="None">
+        <ion-select-option *ngFor="let scoreRule of scoreRules" [value]="scoreRule">{{ scoreRule }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Win Rule</ion-label>
+      <ion-select [(ngModel)]="gameOptions.winRule" placeholder="None">
+        <ion-select-option *ngFor="let winRule of winRules" [value]="winRule">{{ winRule }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ng-template>
 </ion-list>

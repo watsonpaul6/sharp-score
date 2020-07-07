@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { IonSlides } from "@ionic/angular";
 import { DART_GAME_CONTROLLER } from "src/app/core/core.module";
 import { IDartGameController } from "src/app/interfaces/dart-game-controller.interface";
-import { UserAuthService } from 'src/app/core/services/user-auth/user-auth.service';
+import { UserAuthService } from "src/app/core/services/user-auth/user-auth.service";
 
 @Component({
   selector: "app-setup-game",
@@ -32,7 +32,7 @@ export class SetupGamePage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.slides.lockSwipes(true);
+    this.slides.lockSwipes(this.quickStart);
   }
 
   onClickPlay() {
@@ -40,6 +40,9 @@ export class SetupGamePage implements OnInit, AfterViewInit {
     this.router.navigate(["/game/dartboard"]);
   }
 
+  nextSlide() {
+    this.slides.slideNext();
+  }
   private getQueryParams() {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       if (params.has("quickStart")) {
