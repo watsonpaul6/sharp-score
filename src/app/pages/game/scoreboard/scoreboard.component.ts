@@ -11,7 +11,7 @@ export class ScoreboardComponent implements OnInit {
   constructor(@Inject(DART_GAME_CONTROLLER) private dartGameController: IDartGameController) {}
 
   public get scoreboardDisplay$() {
-    return this.dartGameController.scoreboardDisplay$;
+    return this.dartGameController.scoreboardDisplayData$;
   }
 
   ngOnInit() {

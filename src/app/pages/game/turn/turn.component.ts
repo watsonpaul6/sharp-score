@@ -10,8 +10,9 @@ import { IDartGameController } from "src/app/interfaces/dart-game-controller.int
 export class TurnComponent implements OnInit {
   constructor(@Inject(DART_GAME_CONTROLLER) private dartGameController: IDartGameController) {}
 
-  public get CurrentTurn() {
-    return this.dartGameController.currentTurn;
+  public get currentTurn$() {
+    return this.dartGameController.turnDisplayData$;
   }
+
   ngOnInit() {}
 }

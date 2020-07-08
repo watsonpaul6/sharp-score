@@ -1,15 +1,15 @@
-<div class="turn-header-wrapper">
-  <h1 class="turn-header">{{ CurrentTurn.playerId }}'s turn</h1>
+<div class="turn-header-wrapper" *ngIf="currentTurn$ | async">
+  <h1 class="turn-header">{{ (currentTurn$ | async).player }}'s turn</h1>
   <ion-card>
     <ion-card-content>
-      <ion-text>
-        Turn Total: {{ CurrentTurn.ThrowTotal }} 
-      </ion-text>
+      <p>Turn Score: {{ (currentTurn$ | async).turnScore }}</p>
+      <p>Total Score: {{ (currentTurn$ | async).totalScore }}</p>
+      <p>{{ (currentTurn$ | async).isIn ? "IN" : "NOT IN" }}</p>
     </ion-card-content>
   </ion-card>
 </div>
-<div class="turn-throw-wrapper">
-  <ion-card *ngFor="let dt of CurrentTurn.dartThrows; let i = index" class="turn-card">
+<div class="turn-throw-wrapper" *ngIf="currentTurn$ | async">
+  <ion-card *ngFor="let dt of (currentTurn$ | async).dartThrows; let i = index" class="turn-card">
     <p class="turn-counter">
       <ion-badge color="tertiary">
         {{ i + 1 | ordinal }}

@@ -7,6 +7,7 @@ import {
   DartGameThrow,
   DartGameRound,
   DartGameRules,
+  DartGameTurnDisplay,
 } from "src/app/models";
 import { Observable, BehaviorSubject } from "rxjs";
 import { DefaultGameOptions } from "src/app/models/default-gameoptions.factory";
@@ -61,10 +62,11 @@ export class GameControllerService implements IDartGameController {
 
   private _scoreBoardDisplay = new DartGameScoreboardDisplay();
   private scoreBoardDisplay = new BehaviorSubject<DartGameScoreboardDisplay>(this._scoreBoardDisplay);
-  public get scoreboardDisplay$(): Observable<DartGameScoreboardDisplay> {
+  public get scoreboardDisplayData$(): Observable<DartGameScoreboardDisplay> {
     return this.scoreBoardDisplay.asObservable();
   }
 
+  turnDisplayData$: Observable<DartGameTurnDisplay>;
   rounds: DartGameRound[] = [];
   currentRound: DartGameTurn[] = [];
   currentTurn: DartGameTurn;
@@ -85,7 +87,7 @@ export class GameControllerService implements IDartGameController {
     this.rounds = [];
     this.currentRound = [];
 
-    this.currentTurn = new DartGameTurn(this.players[0]);
+    this.currentTurn = new DartGameTurn(this.players[0], this.gameOptions.startingScore);
     // this.currentTurn = new DartGameTurn();
     // this.currentTurn.playerId = this.players[0];
 
@@ -148,8 +150,8 @@ export class GameControllerService implements IDartGameController {
       this.rounds.push({ turns: this.currentRound, roundNumber: this.currentRound.length - 1 });
       this.currentRound = [];
     }
-    this.currentTurn = new DartGameTurn();
-    this.currentTurn.playerId = this.players[nextPlayerIdx];
+    this.currentTurn = new DartGameTurn(this.players[nextPlayerIdx], 1);
+    // this.currentTurn.playerId = this.players[nextPlayerIdx];
   }
 
   private checkWinCondition(dartThrow: DartGameThrow) {

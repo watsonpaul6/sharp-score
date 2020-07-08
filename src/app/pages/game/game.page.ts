@@ -46,9 +46,6 @@ export class GamePage implements OnInit, AfterViewInit, OnDestroy {
     this.loc.replaceState(`/game/${pathString}`);
   }
 
-  public get CurrentTurn() {
-    return this.dartGameController.currentTurn;
-  }
   onClickDartThrow(dartThrow: DartGameThrow) {
     this.dartGameController.addThrowCurrentTurn(dartThrow);
   }
