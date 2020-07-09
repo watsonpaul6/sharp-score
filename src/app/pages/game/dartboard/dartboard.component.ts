@@ -27,8 +27,18 @@ export class DartboardComponent implements OnInit {
     } else if (dartThrow.text === "X3") {
       this.valueMultiplier = this.valueMultiplier === 3 ? 1 : 3;
     } else {
+      if (
+        (dartThrow.value === 0 && this.valueMultiplier == 2) ||
+        (dartThrow.value === 0 && this.valueMultiplier == 3) ||
+        (dartThrow.value === 25 && this.valueMultiplier === 3)
+      ) {
+        this.valueMultiplier = 1;
+        return;
+      }
       let multiplierChar = this.valueMultiplier === 3 ? "T" : this.valueMultiplier === 2 ? "D" : "";
-      this.clickDartThrow.emit(new DartGameThrow(`${multiplierChar}${dartThrow.text}`, dartThrow.value * this.valueMultiplier));
+      this.clickDartThrow.emit(
+        new DartGameThrow(`${multiplierChar}${dartThrow.text}`, dartThrow.value * this.valueMultiplier)
+      );
       this.valueMultiplier = 1;
     }
   }

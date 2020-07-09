@@ -9,7 +9,12 @@
   </ion-card>
 </div>
 <div class="turn-throw-wrapper" *ngIf="currentTurn$ | async">
-  <ion-card *ngFor="let dt of (currentTurn$ | async).dartThrows; let i = index" class="turn-card">
+  <ion-card
+    *ngFor="let dt of (currentTurn$ | async).dartThrows; let i = index"
+    class="turn-card"
+    (click)="onClickRemoveThrow(i)"
+    [ngClass]="{ 'throw-not-in': dt.doesNotCount, 'throw-got-in': dt.gotIn }"
+  >
     <p class="turn-counter">
       <ion-badge color="tertiary">
         {{ i + 1 | ordinal }}

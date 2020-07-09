@@ -55,7 +55,7 @@ export class NewGameControllerService implements IDartGameController {
   addThrowCurrentTurn(dartThrow: DartGameThrow): void {
     if (this.currentTurn.dartThrows.length >= this.gameOptions.throwsPerTurn) return;
     if (!this.currentTurn.isIn) {
-      if (this.checkDartThrowIn(dartThrow)) {
+      if (this.checkDartThrowInOuts(dartThrow, "in")) {
         this.currentTurn.isIn = true;
         dartThrow.gotIn = true;
       } else {
@@ -66,7 +66,31 @@ export class NewGameControllerService implements IDartGameController {
     this.updateSubjects();
   }
   removeThrowCurrentTurn(throwIdx: number): void {
+    const otherValidThrow = this.currentTurn.dartThrows.find((val, idx) => {
+      return this.checkDartThrowInOuts(val, "in") && throwIdx !== idx;
+    });
+    let replacedInDart = false;
+    if (this.currentTurn.dartThrows[throwIdx].gotIn) {
+      if (otherValidThrow) {
+        otherValidThrow.gotIn = true;
+        replacedInDart = true;
+      } else {
+        this.currentTurn.isIn = false;
+      }
+    }
+
+    if (!this.currentTurn.isIn) {
+      this.currentTurn.dartThrows.forEach((val) => (val.doesNotCount = true));
+    }
+
     this.currentTurn.removeDartThrow(throwIdx);
+    if (replacedInDart) {
+      for (let dt of this.currentTurn.dartThrows) {
+        if (!dt.gotIn) {
+          dt.doesNotCount = true;
+        } else break;
+      }
+    }
     this.updateSubjects();
   }
   clearThrowsCurrentTurn(): void {
@@ -155,19 +179,20 @@ export class NewGameControllerService implements IDartGameController {
     return turnScore;
   }
 
-  private checkDartThrowIn(dartThrow: DartGameThrow) {
+  private checkDartThrowInOuts(dartThrow: DartGameThrow, rulesToCheck: "in" | "out") {
+    const rules = rulesToCheck === "in" ? this.gameOptions.inRules : this.gameOptions.outRules;
     let dartThrowIsIn = false;
     if (dartThrow.value <= 0) {
       return dartThrowIsIn;
     }
-    if (this.gameOptions.inRules.length === 0 || this.gameOptions.inRules.length === 3) {
+    if (rules.length === 0 || rules.length === 3) {
       dartThrowIsIn = true;
-    } else if (this.gameOptions.inRules.includes(DartGameRules.InOutRule.Triple) && dartThrow.text.includes("T")) {
+    } else if (rules.includes(DartGameRules.InOutRule.Triple) && dartThrow.text.includes("T")) {
       dartThrowIsIn = true;
-    } else if (this.gameOptions.inRules.includes(DartGameRules.InOutRule.Double) && dartThrow.text.includes("D")) {
+    } else if (rules.includes(DartGameRules.InOutRule.Double) && dartThrow.text.includes("D")) {
       dartThrowIsIn = true;
     } else if (
-      this.gameOptions.inRules.includes(DartGameRules.InOutRule.Single) &&
+      rules.includes(DartGameRules.InOutRule.Single) &&
       !dartThrow.text.includes("T") &&
       !dartThrow.text.includes("D")
     ) {
@@ -185,7 +210,7 @@ export class NewGameControllerService implements IDartGameController {
       for (let round of rounds) {
         let newRow = [];
         for (let turn of round.turns) {
-          newRow.push({ text: turn.ThrowTotal.toString() });
+          newRow.push({ text: `${turn.ThrowTotal} ${this.currentTurn.turnRunningScore}` });
         }
         display.body.push(newRow);
       }

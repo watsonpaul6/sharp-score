@@ -14,5 +14,8 @@ export class TurnComponent implements OnInit {
     return this.dartGameController.turnDisplayData$;
   }
 
+  onClickRemoveThrow(idxToRemove: number) {
+    this.dartGameController.removeThrowCurrentTurn(idxToRemove);
+  }
   ngOnInit() {}
 }

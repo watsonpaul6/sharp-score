@@ -42,4 +42,13 @@
   h1 {
     margin: 0 auto;
   }
+
+  &.throw-not-in {
+    background-color: red;
+    color: white;
+  }
+
+  &.throw-got-in {
+    background-color: greenyellow;
+  }
 }

@@ -9,11 +9,16 @@ export class DartGameTurn {
   isIn: boolean;
   constructor(playerId: string, turnStartingScore: number) {
     this.playerId = playerId;
-    this.turnStartingScore = turnStartingScore
+    this.turnStartingScore = turnStartingScore;
     this.turnRunningScore = turnStartingScore;
   }
   public get ThrowTotal() {
-    return this.dartThrows.reduce((prev, curr) => (prev += curr.value), 0);
+    return this.dartThrows.reduce((prev, curr) => {
+      if (!curr.doesNotCount) {
+        prev += curr.value;
+      }
+      return prev;
+    }, 0);
   }
 
   removeDartThrow(indexToRemove: number) {
@@ -23,13 +28,10 @@ export class DartGameTurn {
   clearDartThrows() {
     this.dartThrows = [];
   }
-
-
 }
-
 
 export class dartThrowArray<T> extends Array<T> {
   push(...items: T[]) {
-    return super.push(...items)
+    return super.push(...items);
   }
 }
